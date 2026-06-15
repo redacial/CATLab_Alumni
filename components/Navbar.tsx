@@ -7,6 +7,7 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/students", label: "Students" },
   { href: "/alumni", label: "Alumni" },
+  { href: "/give", label: "Give" },
 ];
 
 export default function Navbar() {
@@ -33,6 +34,8 @@ export default function Navbar() {
                 className={`rounded-md px-3 py-1.5 text-sm font-medium transition ${
                   active
                     ? "bg-westmont-navy text-white"
+                    : l.href === "/give"
+                    ? "text-westmont-gold font-semibold hover:bg-westmont-gold/10"
                     : "text-westmont-blue hover:bg-westmont-navy/5"
                 }`}
               >

@@ -1,4 +1,4 @@
-import { Announcement, BoardMessage, Person } from "./types";
+import { Announcement, BoardMessage, GivingPledge, Person, TechTalk } from "./types";
 
 const gradients = [
   "from-westmont-navy to-westmont-sky",
@@ -359,6 +359,90 @@ export const announcements: Announcement[] = [
     author: "CATLab Creative Team",
     date: "2026-06-14T12:00:00Z",
   },
+];
+
+export const techTalks: TechTalk[] = [
+  {
+    id: "tt1",
+    title: "From Campus to Code: My Road to Stripe",
+    speaker: "Maya Chen",
+    speakerRole: "Senior Software Engineer · Stripe",
+    date: "2026-05-20T18:00:00Z",
+    description:
+      "Maya walked through her internship journey, the system design skills she built in CATLab, and exactly how she navigated the Stripe new-grad interview loop — including the mistakes she'd take back.",
+    videoUrl: "#",
+  },
+  {
+    id: "tt2",
+    title: "What No One Tells You About Joining a Startup",
+    speaker: "Marcus Lee",
+    speakerRole: "Founding Engineer · Lumen (YC S24)",
+    date: "2026-04-10T18:00:00Z",
+    description:
+      "Employee #3 at a YC company covers the real tradeoffs of startup vs. big-co: equity, chaos, learning velocity, and how to evaluate an offer when there's no Glassdoor page.",
+    videoUrl: "#",
+  },
+  {
+    id: "tt3",
+    title: "Building Ethical ML Systems in Finance",
+    speaker: "Rachel Nguyen",
+    speakerRole: "ML Engineer · Capital One",
+    date: "2026-03-05T18:00:00Z",
+    description:
+      "Rachel dives into the practical challenges of shipping ML models in regulated industries — fairness testing, model cards, and why the 'move fast' mentality breaks down when your model affects someone's loan.",
+    videoUrl: "#",
+  },
+  {
+    id: "tt4",
+    title: "Fundraising 101: How We Raised a Series A",
+    speaker: "Andre Santos",
+    speakerRole: "CTO & Co-Founder · HealthBridge",
+    date: "2026-02-18T18:00:00Z",
+    description:
+      "Andre demystifies the fundraising process — what investors actually look for, how to pitch a technical product to non-technical VCs, and the 3 things he'd do differently.",
+    videoUrl: "#",
+  },
+  {
+    id: "tt5",
+    title: "Designing for Accessibility at Scale",
+    speaker: "Hannah Kim",
+    speakerRole: "Senior UX Designer · Intuit",
+    date: "2026-01-22T18:00:00Z",
+    description:
+      "Hannah shows how accessibility stops being an afterthought when you build it into the design system from day one — including real before/after examples from Intuit's TurboTax redesign.",
+    videoUrl: "#",
+  },
+  {
+    id: "tt6",
+    title: "Getting into Cybersecurity with Zero Experience",
+    speaker: "Caleb Foster",
+    speakerRole: "Security Engineer · Cloudflare",
+    date: "2025-11-12T18:00:00Z",
+    description:
+      "Caleb shares the CTF → bug bounty → job pipeline that worked for him, the free resources he swears by, and why a security cert can matter more than a CS degree in this field.",
+    videoUrl: "#",
+  },
+  {
+    id: "tt7",
+    title: "AI Tools for Your Job Search — A Live Demo",
+    speaker: "CATLab Creative Team",
+    speakerRole: "CATLab Staff",
+    date: "2026-06-27T18:00:00Z",
+    description:
+      "A hands-on session covering how to use AI tools to level up your resume, prep for behavioral interviews, and research companies — without having your application look like everyone else's.",
+    upcoming: true,
+  },
+];
+
+export const seedPledges: GivingPledge[] = [
+  { id: "gp1", name: "Sofia Alvarez", classYear: "2017", message: "CATLab changed my trajectory. Happy to pay it forward.", date: "2026-05-01T00:00:00Z" },
+  { id: "gp2", name: "Andre Santos", classYear: "2015", message: "Invest in the students and the mission takes care of itself.", date: "2026-05-10T00:00:00Z" },
+  { id: "gp3", name: "Tyler Brooks", classYear: "2016", message: "Proud to support the program that launched my career.", date: "2026-05-15T00:00:00Z" },
+  { id: "gp4", name: "Maya Chen", classYear: "2019", date: "2026-05-20T00:00:00Z" },
+  { id: "gp5", name: "Hannah Kim", classYear: "2019", message: "Every student deserves the summer I had in CATLab.", date: "2026-05-28T00:00:00Z" },
+  { id: "gp6", name: "Jordan Whitfield", classYear: "2020", date: "2026-06-01T00:00:00Z" },
+  { id: "gp7", name: "Daniel Okafor", classYear: "2022", message: "Just graduated and already giving back — that's what CATLab taught me.", date: "2026-06-05T00:00:00Z" },
+  { id: "gp8", name: "Marcus Lee", classYear: "2021", date: "2026-06-10T00:00:00Z" },
 ];
 
 export const seedMessages: BoardMessage[] = [

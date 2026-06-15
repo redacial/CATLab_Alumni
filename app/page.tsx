@@ -2,6 +2,7 @@ import Link from "next/link";
 import { announcements, alumni, students } from "@/lib/data";
 import { timeAgo } from "@/lib/time";
 import MessageBoard from "@/components/MessageBoard";
+import TechTalks from "@/components/TechTalks";
 
 export default function HomePage() {
   const sorted = [...announcements].sort((a, b) => {
@@ -32,6 +33,12 @@ export default function HomePage() {
             className="rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/30 transition hover:bg-white/20"
           >
             Browse Students ({students.length})
+          </Link>
+          <Link
+            href="/give"
+            className="rounded-lg bg-westmont-gold px-4 py-2 text-sm font-semibold text-westmont-navy transition hover:opacity-90"
+          >
+            Support CATLab
           </Link>
         </div>
       </section>
@@ -66,6 +73,11 @@ export default function HomePage() {
             </article>
           ))}
         </div>
+      </section>
+
+      {/* Tech Talks */}
+      <section>
+        <TechTalks />
       </section>
 
       {/* Message board */}

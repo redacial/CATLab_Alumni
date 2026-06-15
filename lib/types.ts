@@ -32,6 +32,25 @@ export interface Announcement {
   pinned?: boolean;
 }
 
+export interface TechTalk {
+  id: string;
+  title: string;
+  speaker: string;
+  speakerRole: string;
+  date: string; // ISO
+  description: string;
+  videoUrl?: string;
+  upcoming?: boolean;
+}
+
+export interface GivingPledge {
+  id: string;
+  name: string;
+  classYear?: string;
+  message?: string;
+  date: string;
+}
+
 export interface BoardMessage {
   id: string;
   author: string;
