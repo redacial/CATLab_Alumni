@@ -8,6 +8,7 @@ const links = [
   { href: "/students", label: "Students" },
   { href: "/alumni", label: "Alumni" },
   { href: "/give", label: "Give" },
+  { href: "/animecraft", label: "🌸 SakuraCraft" },
 ];
 
 export default function Navbar() {

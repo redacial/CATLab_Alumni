@@ -18,6 +18,10 @@ API keys. The message board persists in the browser via `localStorage`.
   company, interests, and what they can be _asked about_.
 - **Profile cards** — Click any card to open a detail view with a **Reach out
   by email** button (opens a pre-filled `mailto:`) and a **LinkedIn** link.
+- **SakuraCraft** (`/animecraft`) — 🌸 An anime-inspired, Minecraft-style
+  voxel world built with Three.js: procedurally generated sakura groves, a
+  torii gate at spawn, falling cherry-blossom petals, and full first-person
+  block breaking/placing. Best on desktop with mouse + keyboard.
 
 ## Run it
 
