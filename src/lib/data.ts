@@ -105,15 +105,45 @@ export const interns: Intern[] = [
 
 // ------------------------------------------------------------
 // Partner companies hiring CATLab students (real list)
+// Logos pulled from each partner's own site, in /public/logos
 // ------------------------------------------------------------
-export const partners = [
-  'Webconnex',
-  'Oilstop',
-  'Invoca',
-  'Gerent',
-  'Off Prem',
-  'Tondro Consulting',
-  'Westmont Ridley-Tree Museum of Art',
+export interface Partner {
+  name: string
+  url: string
+  logo: string
+}
+
+export const partners: Partner[] = [
+  {
+    name: 'Webconnex',
+    url: 'https://www.webconnex.com/',
+    logo: '/logos/webconnex.png',
+  },
+  {
+    name: 'Oilstop',
+    url: 'https://www.oilstopinc.com/',
+    logo: '/logos/oilstop.svg',
+  },
+  {
+    name: 'Invoca',
+    url: 'https://www.invoca.com/',
+    logo: '/logos/invoca.svg',
+  },
+  {
+    name: 'OffPrem Technology',
+    url: 'https://offprem.tech/',
+    logo: '/logos/offprem.png',
+  },
+  {
+    name: 'Tondro Consulting',
+    url: 'https://www.tondroconsulting.com/',
+    logo: '/logos/tondro.webp',
+  },
+  {
+    name: 'Westmont Ridley-Tree Museum of Art',
+    url: 'https://www.westmont.edu/museum',
+    logo: '/logos/ridley-tree.svg',
+  },
 ]
 
 // ------------------------------------------------------------

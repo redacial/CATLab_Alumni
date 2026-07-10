@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { interns, outcomes, posts } from '../lib/data'
+import { interns, outcomes, partners, posts } from '../lib/data'
 import { PartnersSection } from '../components/Partners'
 import {
   Avatar,
@@ -64,7 +64,7 @@ function Hero() {
           {[
             ['35 hrs', 'a week in a real role'],
             ['5 hrs', 'weekly professional development'],
-            ['7', 'partner companies hiring'],
+            [String(partners.length), 'partner companies hiring'],
           ].map(([n, label]) => (
             <div key={label}>
               <dt className="sr-only">{label}</dt>

@@ -1,17 +1,27 @@
 import { testimonials, partners, type Testimonial } from '../lib/data'
 import { Container, Eyebrow, Reveal, SectionTitle } from './ui'
 
-// Type-based logo treatment until real partner logo files exist.
+// Real partner logos, linked to each company's site. Rendered
+// white via CSS filter for a uniform strip on the dark section.
 function LogoStrip() {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 sm:gap-x-14">
+    <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 sm:gap-x-16">
       {partners.map((p) => (
-        <span
-          key={p}
-          className="font-serif text-base font-semibold tracking-tight whitespace-nowrap text-white/55 transition-colors duration-200 hover:text-white"
+        <a
+          key={p.name}
+          href={p.url}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={p.name}
+          title={p.name}
+          className="opacity-60 transition-all duration-200 hover:scale-105 hover:opacity-100"
         >
-          {p}
-        </span>
+          <img
+            src={p.logo}
+            alt={`${p.name} logo`}
+            className="h-9 w-auto max-w-40 object-contain brightness-0 invert"
+          />
+        </a>
       ))}
     </div>
   )
