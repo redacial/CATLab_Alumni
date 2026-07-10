@@ -1,120 +1,78 @@
-import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { partners, testimonials } from '../lib/data'
+import { testimonials, partners, type Testimonial } from '../lib/data'
 import { Container, Eyebrow, Reveal, SectionTitle } from './ui'
 
-// Wordmark-style logo treatment: consistent type-based tiles until
-// real partner logo files are collected.
-function PartnerTile({ name }: { name: string }) {
+// Type-based logo treatment until real partner logo files exist.
+function LogoStrip() {
   return (
-    <div className="flex h-full min-h-20 items-center justify-center rounded-lg border border-charcoal/8 bg-white px-4 py-3 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-burgundy-200 hover:shadow-md">
-      <span className="text-center font-serif text-sm leading-snug font-semibold tracking-tight text-charcoal/75">
-        {name}
-      </span>
-    </div>
-  )
-}
-
-export function PartnersGrid() {
-  return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-      {partners.map((p, i) => (
-        <Reveal key={p} delay={i * 0.05} className="h-full">
-          <PartnerTile name={p} />
-        </Reveal>
+    <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 sm:gap-x-14">
+      {partners.map((p) => (
+        <span
+          key={p}
+          className="font-serif text-base font-semibold tracking-tight whitespace-nowrap text-white/55 transition-colors duration-200 hover:text-white"
+        >
+          {p}
+        </span>
       ))}
     </div>
   )
 }
 
-const INTERVAL = 6500
+function Stars() {
+  return (
+    <div className="flex gap-1" aria-label="5 out of 5 stars">
+      {Array.from({ length: 5 }, (_, i) => (
+        <svg
+          key={i}
+          viewBox="0 0 20 20"
+          className="h-4 w-4 fill-gold-400"
+          aria-hidden="true"
+        >
+          <path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9l-5.3 2.7 1-5.8L1.5 7.7l5.9-.9z" />
+        </svg>
+      ))}
+    </div>
+  )
+}
 
-export function TestimonialCarousel() {
-  const [index, setIndex] = useState(0)
-  const [paused, setPaused] = useState(false)
-  const timer = useRef<ReturnType<typeof setInterval> | null>(null)
+function ReviewCard({ t }: { t: Testimonial }) {
+  return (
+    <figure className="flex w-[22rem] shrink-0 flex-col rounded-xl border border-white/10 bg-white/[0.06] p-6 backdrop-blur-sm sm:w-[26rem]">
+      <Stars />
+      <blockquote className="mt-4 flex-1 font-serif text-base leading-relaxed text-white/90">
+        “{t.quote}”
+      </blockquote>
+      <figcaption className="mt-5 text-sm">
+        <span className="font-semibold text-gold-400">{t.attribution}</span>
+        <span className="text-white/50"> · {t.detail}</span>
+      </figcaption>
+    </figure>
+  )
+}
 
-  useEffect(() => {
-    if (paused) return
-    timer.current = setInterval(
-      () => setIndex((i) => (i + 1) % testimonials.length),
-      INTERVAL,
-    )
-    return () => {
-      if (timer.current) clearInterval(timer.current)
-    }
-  }, [paused])
-
-  const go = (dir: 1 | -1) =>
-    setIndex((i) => (i + dir + testimonials.length) % testimonials.length)
-
-  const t = testimonials[index]
-
+// Nonstop marquee: the track holds the review list twice and
+// translates -50%, so the loop is seamless. Pauses on hover.
+function ReviewMarquee() {
+  // repeat the base list so half the track always overfills the
+  // viewport, then double it for the seamless -50% loop
+  const base = [...testimonials, ...testimonials, ...testimonials]
+  const loop = [...base, ...base]
   return (
     <div
-      className="relative"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      className="group relative overflow-hidden"
+      style={{
+        maskImage:
+          'linear-gradient(to right, transparent, black 6%, black 94%, transparent)',
+      }}
     >
-      <div className="min-h-48 sm:min-h-40">
-        <AnimatePresence mode="wait">
-          <motion.figure
-            key={index}
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -14 }}
-            transition={{ duration: 0.45, ease: [0.21, 0.65, 0.36, 1] }}
-          >
-            <blockquote className="font-serif text-xl leading-relaxed text-white sm:text-2xl">
-              “{t.quote}”
-            </blockquote>
-            <figcaption className="mt-5 text-sm">
-              <span className="font-semibold text-gold-400">{t.attribution}</span>
-              <span className="text-white/50"> · {t.detail}</span>
-            </figcaption>
-          </motion.figure>
-        </AnimatePresence>
-      </div>
-
-      <div className="mt-8 flex items-center gap-4">
-        <div className="flex gap-2">
-          {testimonials.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setIndex(i)}
-              aria-label={`Go to testimonial ${i + 1}`}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === index ? 'w-7 bg-gold-400' : 'w-1.5 bg-white/25 hover:bg-white/40'
-              }`}
-            />
-          ))}
-        </div>
-        <div className="ml-auto flex gap-2">
-          <button
-            onClick={() => go(-1)}
-            aria-label="Previous testimonial"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition hover:border-white/50 hover:text-white"
-          >
-            <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 4l-6 6 6 6" />
-            </svg>
-          </button>
-          <button
-            onClick={() => go(1)}
-            aria-label="Next testimonial"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition hover:border-white/50 hover:text-white"
-          >
-            <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M8 4l6 6-6 6" />
-            </svg>
-          </button>
-        </div>
+      <div className="marquee-track flex w-max gap-5 group-hover:[animation-play-state:paused]">
+        {loop.map((t, i) => (
+          <ReviewCard key={i} t={t} />
+        ))}
       </div>
     </div>
   )
 }
 
-// Full dark section combining both — used on Home and Companies
 export function PartnersSection({
   eyebrow = 'Partners',
   title = 'Companies already hiring CATLab talent',
@@ -123,25 +81,27 @@ export function PartnersSection({
   title?: string
 }) {
   return (
-    <section className="bg-burgundy-800 py-20 sm:py-28">
+    <section className="overflow-hidden bg-burgundy-800 py-20 sm:py-28">
       <Container>
-        <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
-          <div>
-            <Reveal>
-              <Eyebrow gold>{eyebrow}</Eyebrow>
-              <SectionTitle dark className="mb-8">
-                {title}
-              </SectionTitle>
-            </Reveal>
-            <PartnersGrid />
+        <Reveal>
+          <div className="text-center">
+            <Eyebrow gold>{eyebrow}</Eyebrow>
+            <SectionTitle dark className="mx-auto max-w-2xl">
+              {title}
+            </SectionTitle>
           </div>
-          <div className="flex flex-col justify-center">
-            <Reveal delay={0.15}>
-              <TestimonialCarousel />
-            </Reveal>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <div className="mt-12">
+            <LogoStrip />
           </div>
-        </div>
+        </Reveal>
       </Container>
+      <Reveal delay={0.2}>
+        <div className="mt-14">
+          <ReviewMarquee />
+        </div>
+      </Reveal>
     </section>
   )
 }

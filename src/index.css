@@ -44,6 +44,26 @@ body {
   color: #fff;
 }
 
+/* Nonstop review marquee — track holds the list twice, so -50% loops seamlessly */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 45s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
 /* Section eyebrow — letter-spaced small caps label */
 .eyebrow {
   font-family: var(--font-sans);
